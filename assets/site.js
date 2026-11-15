@@ -5,9 +5,10 @@
 
   // 404.html serves every missing path: switch to Portuguese under /pt-br/.
   function localise404() {
-    var main = document.querySelector('main[data-pt]');
-    if (!main || !/\/pt-br\//.test(location.pathname)) return;
-    main.innerHTML = main.getAttribute('data-pt');
+    var body = document.body;
+    if (!body.hasAttribute('data-pt') || !/\/pt-br\//.test(location.pathname)) return;
+    body.innerHTML = body.getAttribute('data-pt');
+    body.removeAttribute('data-pt');
     document.documentElement.lang = 'pt-BR';
   }
 
