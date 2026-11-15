@@ -68,6 +68,26 @@
     rows.forEach(function (r) { io.observe(r); });
   }
 
+  // From launch day (the visitor's local date) the wishlist strings become the
+  // buy strings and the Steam widget appears, without rebuilding the site.
+  function release() {
+    var day = document.documentElement.getAttribute('data-release');
+    var now = new Date();
+    var today = now.getFullYear() + '-' + ('0' + (now.getMonth() + 1)).slice(-2) + '-' + ('0' + now.getDate()).slice(-2);
+    if (!day || today < day) return;
+    document.querySelectorAll('[data-buy]').forEach(function (el) { el.textContent = el.getAttribute('data-buy'); });
+    var slot = document.querySelector('.widget[data-src]');
+    if (slot && window.innerWidth >= 720) {
+      var f = document.createElement('iframe');
+      f.src = slot.getAttribute('data-src');
+      f.width = 646;
+      f.height = 190;
+      f.loading = 'lazy';
+      f.title = 'Steam';
+      slot.appendChild(f);
+    }
+  }
+
   // The Daily Curate card shows the visitor's today.
   function today() {
     var cal = document.querySelector('.cal');
@@ -128,6 +148,7 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     localise404();
+    release();
     trailer();
     fitBooks();
     shelve();

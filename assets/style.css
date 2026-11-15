@@ -129,7 +129,8 @@ img.px { display: block; image-rendering: pixelated; flex: 0 0 auto; }
 .endh { font-family: Silkscreen, monospace; font-size: 48px; line-height: 56px; color: #f4e8ca; text-wrap: balance; }
 .lead { max-width: 704px; color: #e3cfa9; }
 .closing .btn { max-width: 100%; }
-.widget { margin-top: 16px; border: 0; max-width: 100%; }
+.widget:empty { display: none; }
+.widget iframe { display: block; margin-top: 16px; border: 0; max-width: 100%; }
 
 /* 404 */
 .nf { max-width: 1080px; padding-top: 96px; display: flex; flex-direction: column; align-items: center; gap: 32px; text-align: center; }
@@ -221,6 +222,7 @@ img.px { display: block; image-rendering: pixelated; flex: 0 0 auto; }
 }
 
 /* ── Support: one parchment sheet on the wooden desk ───────────────────── */
+html:has(body.support) { background: #1a120d; }
 body.support { background: #a2653b; color: #4a2c1c; }
 .swrap { max-width: 1216px; margin: 0 auto; padding: 16px 48px 0; display: flex; flex-wrap: wrap-reverse; align-items: flex-end; justify-content: space-between; gap: 16px 32px; }
 .shead { background: #1a120d; border-bottom: 8px solid #120c08; }
@@ -287,14 +289,20 @@ body.support { background: #a2653b; color: #4a2c1c; }
 .mt { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
 .mn { font-family: Silkscreen, monospace; font-size: 16px; line-height: 24px; color: #4a2715; }
 .mf { color: #5e3320; overflow-wrap: anywhere; }
-.contact { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+.contact { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .box { padding: 24px; display: flex; flex-direction: column; gap: 16px; background: #fffaf0; border: 4px solid #5e3320; box-shadow: 0 4px 0 #b8a27a; }
 .cl { display: flex; align-items: center; gap: 12px; font-family: Silkscreen, monospace; font-size: 16px; line-height: 24px; color: #4a2715; }
 .box a { align-self: flex-start; color: #4a2715; text-underline-offset: 6px; overflow-wrap: anywhere; }
+.box a.commbtn {
+  min-height: 56px; padding: 8px 20px; display: flex; align-items: center;
+  background: #8c5230; border: 4px solid #4a2715; box-shadow: inset 0 4px 0 #d99a63, inset 0 -4px 0 #7d4a2b, 0 4px 0 #120c08;
+  font-family: Silkscreen, monospace; font-size: 16px; line-height: 24px; color: #fbeecb; text-decoration: none;
+}
+.box a.commbtn:hover { background: #a2653b; color: #fbeecb; }
 .cn { color: #5e3320; }
 .privacy { max-width: 896px; }
 .tmpl { display: inline-block; padding: 4px 12px; background: #eedcbb; border: 4px dashed #b8a27a; font-family: Silkscreen, monospace; font-size: 16px; line-height: 24px; color: #5e3320; }
-.privacy h1 { margin-top: 24px; }
+.privacy h1 { margin-top: 0; }
 .upd { margin-top: 16px; color: #5e3320; }
 .toc { margin-top: 40px; padding: 24px; background: #fff6de; border: 4px solid #dbc9a4; }
 .toc > span { display: block; margin-bottom: 8px; font-family: Silkscreen, monospace; font-size: 16px; line-height: 24px; color: #5e3320; }
@@ -314,7 +322,7 @@ body.support { background: #a2653b; color: #4a2c1c; }
   .tabs ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .sfoot .swrap { padding: 32px 32px 48px; }
 }
-@media (max-width: 799px) { .manuals { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 799px) { .manuals, .contact { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 599px) {
   .swrap { padding: 16px 16px 0; }
   .desk { padding: 16px 8px 48px; }
